@@ -8,35 +8,28 @@ public class Polynomial {
     private List<Monomial> poly;
 
 
-    private Polynomial(String input) {
-        String[] s = input.split(" ");
-        System.out.println(Arrays.toString(s));
-        poly = new LinkedList<Monomial>();
-        for (int i = 0; i < s.length; i++) {
-            if (s[i].contains("/")) {
-                String[] s2 = s[i].split("/");
-                poly.add(new Monomial(i, new Rational(java.lang.Integer.parseInt(s2[0]), java.lang.Integer.parseInt(s2[1]))));
-            } else {
-                poly.add(new Monomial(i, new Integer(java.lang.Integer.parseInt(s[i]))));
-            }
-        }
-    }
-
     private Polynomial(List<Monomial> monos) {
         poly = monos;
+    }
+
+    private Polynomial(String input) {
+        String[] s=input.split(" ");
+        System.out.println(Arrays.toString(s));
+        poly = new LinkedList<Monomial>();
+        for (int i = 0; i < s.length; i++)
+        {
+            if (s[i].contains("/")) {
+                String[] s2 = s[i].split("/");
+                poly.add(new Monomial(i, new Rational(java.lang.Integer.parseInt(s2[0]),java.lang.Integer.parseInt(s2[1]))));
+            } else {
+                poly.add(new Monomial(i,new Integer(java.lang.Integer.parseInt(s[i]))));
+            }
+        }
     }
 
     public static Polynomial build(String input) {
         return new Polynomial(input);
 
-    }
-
-    private void padding(List<Monomial> monos, int n) {
-        if (monos.size() < n) {
-            for (int i = monos.size(); i < n; i++) {
-                monos.add(new Monomial(i, new Integer(0)));
-            }
-        }
     }
 
     Polynomial add(Polynomial p) {
@@ -68,34 +61,65 @@ public class Polynomial {
     }
 
     Scalar evaluate(Scalar s) {
-        Scalar scalar = new Rational(0, 1);
-        for (int i = 0; i < poly.size(); i++) {
-            scalar = scalar.add(poly.get(i).evaluate(s));
+        Scalar scalar= new Rational(0,1);
+        for (int i = 0; i <poly.size() ; i++) {
+            scalar=scalar.add(poly.get(i).evaluate(s));
 
         }
         return scalar;
     }
 
     Polynomial derivative() {
-        Polynomial NewPoly = new Polynomial("");
-        for (int i = 0; i <= poly.size(); i++) {
+        Polynomial NewPoly=new Polynomial("");
+        for (int i=0;i<=poly.size();i++)
+        {
             NewPoly.poly.add(poly.get(i).derivative());
         }
         return NewPoly;
     }
 
     public String toString() {
-        String s = "";
-        s = poly.get(0).toString();
-        for (int i = 1; i < poly.size(); i++) {
-            if (poly.get(i).toString().contains("-")) {
+        String s="";
+        s=poly.get(0).toString();
+        for (int i=1;i<poly.size();i++)
+        {
+            if(poly.get(i).toString().contains("-"))
+            {
                 s += " " + poly.get(i).toString().charAt(0) + " " + poly.get(i).toString().substring(1);
-            } else {
-                s += " + " + poly.get(i).toString();
+            }
+            else{
+                s += " + "+ poly.get(i).toString();
             }
 
         }
         //s = s.substring(0, s.length()-1);
         return s;
+    }
+
+    private String[] backToInput() {
+        String[] output = new String[poly.get(poly.size() - 1).getExp() + 1];
+        for (Monomial m: poly) {
+            output[m.getExp()] = m.getCoefficient().toString();
+        }
+        for (String s: output) {
+            if (s == null) s = "0";
+        }
+        return output;
+    }
+
+    private boolean[] exps() {
+        boolean[] output = new boolean[poly.get(poly.size() - 1).getExp() + 1];
+        for (Monomial m: poly) {
+            output[m.getExp()] = true;
+        }
+        return output;
+    }
+
+    private void padding(List<Monomial> monos, int n) {
+        if (monos.size() < n) {
+            for (int i = monos.size(); i < n; i++) {
+                monos.add(new Monomial(i, new Integer(0)));
+            }
+        }
     }
 }
