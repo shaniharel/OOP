@@ -50,4 +50,8 @@ public class Monomial {
     public int getExp() {
         return exponent;
     }
+
+    public Scalar getCoefficient() {
+        return coefficient;
+    }
 }

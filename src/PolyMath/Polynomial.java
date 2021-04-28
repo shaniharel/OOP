@@ -31,10 +31,15 @@ public class Polynomial {
 
     }
 
+    /*
     Polynomial add(Polynomial p) {
-
+        boolean[] me = this.exps();
+        boolean[] other = p.exps();
+        for (int i = 0; i < )
     }
 
+     */
+//"--------------------------------------"
     Polynomial add(Polynomial p) {
         Polynomial NewPoly = new Polynomial("");
         for (int i=0;i<poly.size();i++)
@@ -89,11 +94,23 @@ public class Polynomial {
         //s = s.substring(0, s.length()-1);
         return s;
     }
-    
-    private String toInputString() {
-        int[] output = new int[poly.get(poly.size() -1 ).getExp()];
+
+    private String[] backToInput() {
+        String[] output = new String[poly.get(poly.size() - 1).getExp() + 1];
         for (Monomial m: poly) {
-            output[m.getExp()] = m.
+            output[m.getExp()] = m.getCoefficient().toString();
         }
+        for (String s: output) {
+            if (s == null) s = "0";
+        }
+        return output;
+    }
+
+    private boolean[] exps() {
+        boolean[] output = new boolean[poly.get(poly.size() - 1).getExp() + 1];
+        for (Monomial m: poly) {
+            output[m.getExp()] = true;
+        }
+        return output;
     }
 }
