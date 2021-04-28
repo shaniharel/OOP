@@ -1,0 +1,99 @@
+package PolyMath;
+
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+
+public class Polynomial {
+    private List<Monomial> poly;
+
+
+    private Polynomial(String input) {
+        String[] s=input.split(" ");
+        System.out.println(Arrays.toString(s));
+        poly = new LinkedList<Monomial>();
+        for (int i=0;i<s.length;i++)
+        {
+            if(s[i].contains("/")) {
+                String[] s2=s[i].split("/");
+                poly.add(new Monomial(i, new Rational(java.lang.Integer.parseInt(s2[0]),java.lang.Integer.parseInt(s2[1]))));
+            } else {
+                int in = java.lang.Integer.parseInt(s[i]);
+                Integer integ = new Integer(in);
+                poly.add(new Monomial(i,integ));
+            }
+        }
+    }
+
+    public static Polynomial build(String input)
+    {
+        return new Polynomial(input);
+
+    }
+
+    Polynomial add(Polynomial p) {
+
+    }
+
+    Polynomial add(Polynomial p) {
+        Polynomial NewPoly = new Polynomial("");
+        for (int i=0;i<poly.size();i++)
+        {
+            NewPoly.poly.add(p.poly.get(i).add(this.poly.get(i)));
+        }
+        return NewPoly;
+    }
+
+    Polynomial mul(Polynomial p) {
+        Polynomial NewPoly=new Polynomial("0");
+        for (int i=0;i<poly.size();i++)
+        {
+            NewPoly.poly.add(p.poly.get(i).mult(this.poly.get(i)));
+        }
+        return NewPoly;
+
+    }
+
+    Scalar evaluate(Scalar s) {
+        Scalar scalar= new Rational(0,1);
+        for (int i = 0; i <poly.size() ; i++) {
+            scalar=scalar.add(poly.get(i).evaluate(s));
+
+        }
+        return scalar;
+    }
+
+    Polynomial derivative() {
+        Polynomial NewPoly=new Polynomial("");
+        for (int i=0;i<=poly.size();i++)
+        {
+            NewPoly.poly.add(poly.get(i).derivative());
+        }
+        return NewPoly;
+    }
+
+    public String toString() {
+        String s="";
+        s=poly.get(0).toString();
+        for (int i=1;i<poly.size();i++)
+        {
+            if(poly.get(i).toString().contains("-"))
+            {
+                s += " " + poly.get(i).toString().charAt(0) + " " + poly.get(i).toString().substring(1);
+            }
+            else{
+                s += " + "+ poly.get(i).toString();
+            }
+
+        }
+        //s = s.substring(0, s.length()-1);
+        return s;
+    }
+    
+    private String toInputString() {
+        int[] output = new int[poly.get(poly.size() -1 ).getExp()];
+        for (Monomial m: poly) {
+            output[m.getExp()] = m.
+        }
+    }
+}
