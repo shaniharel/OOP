@@ -8,19 +8,21 @@ public class Polynomial {
     private List<Monomial> poly;
 
 
+    private Polynomial(List<Monomial> monos) {
+        poly = monos;
+    }
+
     private Polynomial(String input) {
         String[] s=input.split(" ");
         System.out.println(Arrays.toString(s));
         poly = new LinkedList<Monomial>();
-        for (int i=0;i<s.length;i++)
+        for (int i = 0; i < s.length; i++)
         {
-            if(s[i].contains("/")) {
-                String[] s2=s[i].split("/");
+            if (s[i].contains("/")) {
+                String[] s2 = s[i].split("/");
                 poly.add(new Monomial(i, new Rational(java.lang.Integer.parseInt(s2[0]),java.lang.Integer.parseInt(s2[1]))));
             } else {
-                int in = java.lang.Integer.parseInt(s[i]);
-                Integer integ = new Integer(in);
-                poly.add(new Monomial(i,integ));
+                poly.add(new Monomial(i,new Integer(java.lang.Integer.parseInt(s[i]))));
             }
         }
     }
@@ -31,22 +33,16 @@ public class Polynomial {
 
     }
 
-    /*
     Polynomial add(Polynomial p) {
-        boolean[] me = this.exps();
-        boolean[] other = p.exps();
-        for (int i = 0; i < )
-    }
-
-     */
-//"--------------------------------------"
-    Polynomial add(Polynomial p) {
-        Polynomial NewPoly = new Polynomial("");
-        for (int i=0;i<poly.size();i++)
-        {
-            NewPoly.poly.add(p.poly.get(i).add(this.poly.get(i)));
-        }
-        return NewPoly;
+        List<Monomial> me = new LinkedList<Monomial>();
+        List<Monomial> other = new LinkedList<Monomial>();
+        me.addAll(this.poly);
+        other.addAll(p.poly);
+        padding(me, other.size());
+        padding(other, me.size());
+        List<Monomial> monos = new LinkedList<Monomial>();
+        for (int i = 0; i < me.size(); i++) monos.add(me.get(i).add(other.get(i)));
+        return new Polynomial(monos);
     }
 
     Polynomial mul(Polynomial p) {
@@ -112,5 +108,24 @@ public class Polynomial {
             output[m.getExp()] = true;
         }
         return output;
+    }
+
+    private boolean[] padding(boolean[] arr, int n) {
+        if (arr.length < n) {
+            boolean[] newArr = new boolean[n];
+            for (int i = 0; i < arr.length; i++) {
+                newArr[i] = arr[i];
+            }
+            return newArr;
+        }
+        return arr;
+    }
+
+    private void padding(List<Monomial> monos, int n) {
+        if (monos.size() < n) {
+            for (int i = monos.size(); i < n; i++) {
+                monos.add(new Monomial(i, new Integer(0)));
+            }
+        }
     }
 }
