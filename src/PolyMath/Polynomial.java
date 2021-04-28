@@ -51,9 +51,16 @@ public class Polynomial {
 
     Polynomial mul(Polynomial p) {
         Polynomial NewPoly=new Polynomial("0");
+        for (int i=0;i<p.poly.size();i++) {
+            NewPoly.poly.add(poly.get(0).mult(p.poly.get(i)));
+        }
+        Polynomial addMe=new Polynomial("0");
         for (int i=0;i<poly.size();i++)
         {
-            NewPoly.poly.add(p.poly.get(i).mult(this.poly.get(i)));
+            for (int j=1; j<p.poly.size();j++) {
+                addMe.poly.add(p.poly.get(j).mult(this.poly.get(i)));
+            }
+            NewPoly=NewPoly.add(addMe);
         }
         return NewPoly;
 
