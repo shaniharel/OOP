@@ -1,13 +1,22 @@
 package PolyMath;
 
+import com.sun.source.tree.BreakTree;
+
 public class Rational implements PolyMath.Scalar {
 
     private int numerator;
     private int denominator;
 
     public Rational(int numerator, int denominator) {
-        this.numerator = numerator;
-        this.denominator = denominator;
+        if (numerator == 0) {
+            this.numerator = 0;
+            this.denominator = 1;
+        } else {
+            this.numerator = numerator;
+            if (denominator != 0) this.denominator = denominator;
+            else throw new IllegalArgumentException("can't divide by zero!!");
+        }
+
     }
 
     public Scalar add(Scalar s) {
@@ -60,14 +69,15 @@ public class Rational implements PolyMath.Scalar {
 
     public Rational reduce() {
         int gcd = gcd(numerator, denominator);
-        return new Rational(numerator / gcd, denominator / gcd);
+        if (gcd != 0) return new Rational(numerator / gcd, denominator / gcd);
+        else return new Rational(0,1);
     }
 
     public String toString() {
         Rational r = this.reduce();
         if (r.numerator == 0) return "";
         if (r.denominator == 1) return String.valueOf(r.numerator);
-        return "(" + String.valueOf(r.numerator) + "/" + String.valueOf(r.denominator) + ")";
+        return String.valueOf(r.numerator) + "/" + String.valueOf(r.denominator);
     }
 
     public double getNumber() {

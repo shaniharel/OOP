@@ -42,8 +42,15 @@ public class Monomial {
     public String toString() {
         String output = coefficient.toString();
         if (output.length() == 0) return output;
-        if (exponent > 1) output += "x^" + String.valueOf(exponent);
-        else if (exponent == 1) output += "x";
+
+        if (output.contains("/")) {
+            if (exponent > 1) output = output = "(" + output + ")" + "x^" + String.valueOf(exponent);
+            else if (exponent == 1) output = "(" + output + ")" + "x";
+        } else {
+            if (exponent > 1) output += "x^" + String.valueOf(exponent);
+            else if (exponent == 1) output += "x";
+        }
+
         return output;
     }
 

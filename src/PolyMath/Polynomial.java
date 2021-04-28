@@ -1,6 +1,4 @@
 package PolyMath;
-
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -14,7 +12,6 @@ public class Polynomial {
 
     private Polynomial(String input) {
         String[] s=input.split(" ");
-        System.out.println(Arrays.toString(s));
         poly = new LinkedList<Monomial>();
         for (int i = 0; i < s.length; i++)
         {
@@ -29,7 +26,6 @@ public class Polynomial {
 
     public static Polynomial build(String input) {
         return new Polynomial(input);
-
     }
 
     Polynomial add(Polynomial p) {
@@ -61,58 +57,30 @@ public class Polynomial {
     }
 
     Scalar evaluate(Scalar s) {
-        Scalar scalar= new Rational(0,1);
+        Scalar scalar = new Rational(0,1);
         for (int i = 0; i <poly.size() ; i++) {
-            scalar=scalar.add(poly.get(i).evaluate(s));
+            scalar = scalar.add(poly.get(i).evaluate(s));
 
         }
         return scalar;
     }
 
     Polynomial derivative() {
-        Polynomial NewPoly=new Polynomial("");
-        for (int i=0;i<=poly.size();i++)
-        {
-            NewPoly.poly.add(poly.get(i).derivative());
-        }
+        Polynomial NewPoly = new Polynomial("0");
+        for (int i = 0; i < poly.size(); i++) NewPoly.poly.add(poly.get(i).derivative());
         return NewPoly;
     }
 
     public String toString() {
-        String s="";
-        s=poly.get(0).toString();
-        for (int i=1;i<poly.size();i++)
-        {
+        String s = "";
+        s = poly.get(0).toString();
+        for (int i = 1; i < poly.size(); i++) {
             if(poly.get(i).toString().contains("-"))
-            {
                 s += " " + poly.get(i).toString().charAt(0) + " " + poly.get(i).toString().substring(1);
-            }
-            else{
-                s += " + "+ poly.get(i).toString();
-            }
+            else s += " + " + poly.get(i).toString();
 
         }
-        //s = s.substring(0, s.length()-1);
         return s;
-    }
-
-    private String[] backToInput() {
-        String[] output = new String[poly.get(poly.size() - 1).getExp() + 1];
-        for (Monomial m: poly) {
-            output[m.getExp()] = m.getCoefficient().toString();
-        }
-        for (String s: output) {
-            if (s == null) s = "0";
-        }
-        return output;
-    }
-
-    private boolean[] exps() {
-        boolean[] output = new boolean[poly.get(poly.size() - 1).getExp() + 1];
-        for (Monomial m: poly) {
-            output[m.getExp()] = true;
-        }
-        return output;
     }
 
     private void padding(List<Monomial> monos, int n) {
