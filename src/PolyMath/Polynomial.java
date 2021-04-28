@@ -115,17 +115,6 @@ public class Polynomial {
         return output;
     }
 
-    private boolean[] padding(boolean[] arr, int n) {
-        if (arr.length < n) {
-            boolean[] newArr = new boolean[n];
-            for (int i = 0; i < arr.length; i++) {
-                newArr[i] = arr[i];
-            }
-            return newArr;
-        }
-        return arr;
-    }
-
     private void padding(List<Monomial> monos, int n) {
         if (monos.size() < n) {
             for (int i = monos.size(); i < n; i++) {
