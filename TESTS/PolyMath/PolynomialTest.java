@@ -55,7 +55,7 @@ class PolynomialTest {
         assertEquals("4x^10", Polynomial.build("0 0 0 0 0 0 0 0 0 0 4").toString());
         assertEquals("4 + 2x + 6x^2 + 7x^3", Polynomial.build("4 2 6 7").toString());
         assertEquals("2 + 2x + 2x^2 + 2x^3", Polynomial.build("4/2 2 6/3 2").toString());
-        assertEquals("3x - (3/8)x^2 - 5x^3 + (2/5)x^4", Polynomial.build("0 3 -3/8 0/4 -5 2/5").toString());
+        assertEquals("3x - 3/8x^2 - 5x^3 + 2/5x^4", Polynomial.build("0 3 -3/8 0/4 -5 2/5").toString());
         assertEquals("x + 2x^6 - 3x^8", Polynomial.build("0 1 0 0 0 0 2 0 -3").toString());
         assertEquals("-1/2", Polynomial.build("-1/2").toString());
     }
@@ -64,11 +64,11 @@ class PolynomialTest {
     void add() {
         assertEquals("1 + x", p1.add(p2).toString());
         assertEquals("1 + x + x^2 + x^3", p4.add(p3).toString());
-        assertEquals("1 + 4x + (5/8)x^2 - 5x^4 + (2/5)x^5", p3.add(p8).toString());
+        assertEquals("1 + 4x + 5/8x^2 - 5x^4 + 2/5x^5", p3.add(p8).toString());
         assertEquals("7/2 + 2x + 6x^2 + 7x^3", p6.add(p10).toString());
         assertEquals("1 + 4x^10", p1.add(p5).toString());
         assertEquals("5 + 3x + 7x^2 + 7x^3", p6.add(p3).toString());
-        assertEquals("2 + 5x + (13/8)x^2 + 2x^3 - 5x^4 + (2/5)x^5", p7.add(p8).toString());
+        assertEquals("2 + 5x + 13/8x^2 + 2x^3 - 5x^4 + 2/5x^5", p7.add(p8).toString());
     }
 
     @Test
@@ -94,7 +94,7 @@ class PolynomialTest {
     @Test
     void derivative() {
         assertEquals("2 + 12x + 21x^2", p6.derivative().toString());
-        assertEquals("3 - (3/4)x - 20x^3 + 2x^4", p8.derivative().toString());
+        assertEquals("3 - 3/4x - 20x^3 + 2x^4", p8.derivative().toString());
         assertEquals("1 + 2x", p3.derivative().toString());
         assertEquals("2 + 4x + 6x^2", p7.derivative().toString());
         assertEquals("0", p1.derivative().toString());
@@ -111,7 +111,7 @@ class PolynomialTest {
         assertEquals("4x^10", p5.toString());
         assertEquals("4 + 2x + 6x^2 + 7x^3", p6.toString());
         assertEquals("2 + 2x + 2x^2 + 2x^3", p7.toString());
-        assertEquals("3x - (3/8)x^2 - 5x^3 + (2/5)x^4", p8.toString());
+        assertEquals("3x - 3/8x^2 - 5x^3 + 2/5x^4", p8.toString());
         assertEquals("x + 2x^6 - 3x^8", p9.toString());
         assertEquals("-1/2", p10.toString());
     }

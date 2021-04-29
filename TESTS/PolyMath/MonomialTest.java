@@ -35,7 +35,7 @@ class MonomialTest {
     void add() {
         assertEquals("3x^2",m1.add(m6).toString());
         assertEquals("-2",m2.add(m7).toString());
-        assertEquals("(7/8)x^4",m5.add(m8).toString());
+        assertEquals("7/8x^4",m5.add(m8).toString());
     }
 
     @Test
@@ -44,7 +44,7 @@ class MonomialTest {
         assertEquals("7/8x^4",m2.mult(m5).toString());
         assertEquals("6x^3",m3.mult(m4).toString());
         assertEquals("-63",m2.mult(m7).toString());
-        assertEquals("(3/32)x^8",m5.mult(m8).toString());
+        assertEquals("3/32x^8",m5.mult(m8).toString());
 
 
     }
@@ -77,7 +77,7 @@ class MonomialTest {
     void testToString() {
         assertEquals("-8x^2",m1.toString());
         assertEquals("7",m2.toString());
-        assertEqualsgit ("9x",m3.toString());
-        assertEquals("(3/4)x^4",m8.toString());
+        assertEquals ("9x",m3.toString());
+        assertEquals("3/4x^4",m8.toString());
     }
 }
