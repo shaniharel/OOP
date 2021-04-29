@@ -16,6 +16,10 @@ public class Rational implements PolyMath.Scalar {
             if (denominator != 0) this.denominator = denominator;
             else throw new IllegalArgumentException("can't divide by zero!!");
         }
+        if ((this.numerator < 0 & this.denominator < 0) || (this.numerator > 0 & this.denominator < 0)) {
+            this.numerator *= -1;
+            this.denominator *= -1;
+        }
 
     }
 
@@ -59,7 +63,7 @@ public class Rational implements PolyMath.Scalar {
 
     public int sign() {
         if (numerator == 0) return 0;
-        else if (numerator > 0 && denominator > 1) return 1;
+        else if (numerator > 0 && denominator > 0) return 1;
         else return -1;
     }
 
@@ -69,7 +73,9 @@ public class Rational implements PolyMath.Scalar {
 
     public Rational reduce() {
         int gcd = gcd(numerator, denominator);
-        if (gcd != 0) return new Rational(numerator / gcd, denominator / gcd);
+        //if (numerator > 0 & denominator < 0) gcd *= -1;
+        if (gcd != 0)
+            return new Rational(numerator / gcd, denominator / gcd);
         else return new Rational(0,1);
     }
 

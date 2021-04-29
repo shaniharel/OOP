@@ -123,7 +123,7 @@ class RationalTest {
     @Test
     void testToString() {
         assertEquals("2/3",r1.toString());
-        assertEquals("3/9",r2.toString());
+        assertEquals("1/3",r2.toString());
         assertEquals("1",r3.toString());
         assertEquals("-7/8",r8.toString());
     }

@@ -1,9 +1,8 @@
 package PolyMath;
 
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class MonomialTest {
     private Monomial m1;
@@ -16,7 +15,7 @@ class MonomialTest {
     private Monomial m8;
     private Monomial m9;
 
-    @BeforeAll
+    @BeforeEach
     void setUp() {
         m1 = new Monomial(2, new Integer(-8));
         m2 = new Monomial(0, new Integer(7));
@@ -52,7 +51,7 @@ class MonomialTest {
     @Test
     void evaluate() {
         assertEquals("-9/2",m1.evaluate(new Rational(3,4)).toString());
-        assertEquals("6",m2.evaluate(new Integer(6)).toString());
+        assertEquals("7",m2.evaluate(new Integer(6)).toString());
         assertEquals("1",m3.evaluate(new Rational(1,9)).toString());
         assertEquals("24",m4.evaluate(new Integer(6)).toString());
     }
@@ -77,7 +76,7 @@ class MonomialTest {
     void testToString() {
         assertEquals("-8x^2",m1.toString());
         assertEquals("7",m2.toString());
-        assertEquals ("9x",m3.toString());
+        assertEquals("9x",m3.toString());
         assertEquals("3/4x^4",m8.toString());
     }
 }

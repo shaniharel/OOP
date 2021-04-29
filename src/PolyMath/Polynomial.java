@@ -6,8 +6,18 @@ public class Polynomial {
     private List<Monomial> poly;
 
 
-    private Polynomial(List<Monomial> monos) {
-        poly = monos;
+    public static Polynomial PolyByList(List<Monomial> monos) {
+        int max = 0;
+        for (Monomial m: monos) if (m.getExp() > max) max = m.getExp();
+        String[] coef = new String[max + 1];
+        for (Monomial m: monos) coef[m.getExp()] = m.getCoefficient().toString();
+        String s = "";
+        for (int i = 0; i < coef.length - 1; i++) {
+            if (coef[i] == null) s += "0 ";
+            else s+= coef[i] + " ";
+        }
+        s += coef[coef.length-1];
+        return build(s);
     }
 
     public Polynomial(String input) {
@@ -37,23 +47,41 @@ public class Polynomial {
         padding(other, me.size());
         List<Monomial> monos = new LinkedList<Monomial>();
         for (int i = 0; i < me.size(); i++) monos.add(me.get(i).add(other.get(i)));
-        return new Polynomial(monos);
+        return PolyByList(monos);
     }
 
     Polynomial mul(Polynomial p) {
-        Polynomial NewPoly = new Polynomial("0");
-        for (int i = 0; i < p.poly.size(); i++) {
-            NewPoly.poly.add(poly.get(0).mult(p.poly.get(i)));
-        }
-        Polynomial addMe = new Polynomial("0");
-        for (int i = 0; i < poly.size(); i++) {
-            for (int j = 1; j < p.poly.size(); j++) {
-                addMe.poly.add(p.poly.get(j).mult(this.poly.get(i)));
+        List<Monomial> thisPoly = this.poly;
+        List<Monomial> pPoly = p.poly;
+        Polynomial output = new Polynomial("0");
+        List<Monomial> mono = new LinkedList<Monomial>();
+        for (int i = 0; i < thisPoly.size(); i++) {
+            for (int j = 0; j < pPoly.size(); j++) {
+                mono.add(thisPoly.get(i).mult(pPoly.get(j)));
             }
-            NewPoly = NewPoly.add(addMe);
+            output = output.add(PolyByList(mono));
+            mono.clear();
         }
-        return NewPoly;
+        return output;
+/*
+        List<Monomial> monos = new LinkedList<Monomial>();
+        //for (int i = 0; i < p.poly.size(); i++) {
+        //    monos.add(poly.get(0).mult(p.poly.get(i)));
+        //}
+        //Polynomial NewPoly = byList(monos);
+        Polynomial addMe = new Polynomial("0");
 
+        for (int i = 0; i < poly.size(); i++) {
+            for (int j = 0; j < p.poly.size(); j++) {
+                monos.add(this.poly.get(i).mult(p.poly.get(j)));
+                //addMe.poly.add(p.poly.get(j).mult(this.poly.get(i)));
+            }
+            addMe.add(byList(monos));
+            monos = new LinkedList<Monomial>();
+            //NewPoly = NewPoly.add(addMe);
+        }
+        return addMe;
+*/
     }
 
     Scalar evaluate(Scalar s) {
@@ -66,20 +94,31 @@ public class Polynomial {
     }
 
     Polynomial derivative() {
-        Polynomial NewPoly = new Polynomial("0");
-        for (int i = 0; i < poly.size(); i++) NewPoly.poly.add(poly.get(i).derivative());
-        return NewPoly;
+        //Polynomial NewPoly = new Polynomial("0");
+        List<Monomial> monos = new LinkedList<Monomial>();
+        for (int i = 0; i < poly.size(); i++) {
+            monos.add(poly.get(i).derivative());
+        }
+        return PolyByList(monos);
     }
 
     public String toString() {
         String s = "";
-        s = poly.get(0).toString();
-        for (int i = 1; i < poly.size(); i++) {
-            if(poly.get(i).toString().contains("-"))
-                s += " " + poly.get(i).toString().charAt(0) + " " + poly.get(i).toString().substring(1);
-            else s += " + " + poly.get(i).toString();
-
+        if (poly.size() == 1) return poly.get(0).toString();
+        //s = poly.get(0).toString();
+        for (int i = 0; i < poly.size(); i++) {
+            if (poly.get(i).sign() != 0) {
+                if (s.length() == 0) {
+                    s += poly.get(i).toString();
+                } else {
+                    if (poly.get(i).sign() < 0) {
+                        s += " " + poly.get(i).toString().charAt(0) + " " + poly.get(i).toString().substring(1);
+                    }
+                    else s += " + " + poly.get(i).toString();
+                }
+            }
         }
+        if (s.isEmpty()) return "0";
         return s;
     }
 

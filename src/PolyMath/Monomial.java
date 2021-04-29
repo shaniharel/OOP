@@ -18,7 +18,7 @@ public class Monomial {
 
     public Monomial mult(Monomial m) {
         Scalar multiply = this.coefficient.mul(m.coefficient);
-        return new Monomial(this.exponent * m.exponent, multiply);
+        return new Monomial(this.exponent + m.exponent, multiply);
     }
 
     public Scalar evaluate(Scalar s) {
@@ -30,7 +30,7 @@ public class Monomial {
         Scalar coef = coefficient;
         if (exponent == 0) coef = new Integer(0);
         else {
-            coef.mul(new Integer(exp));
+            coef = coef.mul(new Integer(exp));
             exp--;
         }
         return new Monomial(exp, coef);
@@ -42,14 +42,12 @@ public class Monomial {
 
     public String toString() {
         String output = coefficient.toString();
-        if (output.length() == 1 && output.charAt(0) == '0' && exponent > 0) return "";
-        if (output.contains("/")) {
-            if (exponent > 1) output = output = "(" + output + ")" + "x^" + String.valueOf(exponent);
-            else if (exponent == 1) output = "(" + output + ")" + "x";
-        } else {
-            if (exponent > 1) output += "x^" + String.valueOf(exponent);
-            else if (exponent == 1) output += "x";
-        }
+        if (exponent == 0) return output;
+        if (output.equals("0")) return "";
+        if (output.equals("1")) output = "";
+        if (output.equals("-1")) output = "-";
+        if (exponent == 1) output += "x";
+        else output += "x^" + String.valueOf(exponent);
 
         return output;
     }
