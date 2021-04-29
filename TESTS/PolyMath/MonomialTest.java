@@ -75,9 +75,9 @@ class MonomialTest {
 
     @Test
     void testToString() {
-        assertEquals(,m1.toString());
-        assertEquals(,m1.toString());
-        assertEquals(,m1.toString());
-        assertEquals(,m1.toString());
+        assertEquals("-8x^2",m1.toString());
+        assertEquals("7",m2.toString());
+        assertEqualsgit ("9x",m3.toString());
+        assertEquals("(3/4)x^4",m8.toString());
     }
 }
