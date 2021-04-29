@@ -44,7 +44,7 @@ public class Rational implements PolyMath.Scalar {
 
     public Scalar mulInteger(Integer s) {
         Rational tmp = new Rational(s.getNumber(), 1);
-        return mulRational(tmp);
+        return mul(tmp);
     }
 
     public Scalar power(int exponent) {
@@ -75,7 +75,7 @@ public class Rational implements PolyMath.Scalar {
 
     public String toString() {
         Rational r = this.reduce();
-        if (r.numerator == 0) return "";
+        if (r.numerator == 0) return "0";
         if (r.denominator == 1) return String.valueOf(r.numerator);
         return String.valueOf(r.numerator) + "/" + String.valueOf(r.denominator);
     }

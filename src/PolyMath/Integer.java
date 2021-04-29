@@ -22,7 +22,7 @@ public class Integer implements Scalar {
 
     @Override
     public Scalar addRational(Rational s) {
-        return s.addRational(s);
+        return s.addInteger(this);
     }
 
     @Override
@@ -32,7 +32,7 @@ public class Integer implements Scalar {
 
     @Override
     public Scalar mulRational(Rational s) {
-        return s.mulRational(s);
+        return s.mulInteger(this);
     }
 
     @Override
