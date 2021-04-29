@@ -75,5 +75,9 @@ class MonomialTest {
 
     @Test
     void testToString() {
+        assertEquals(,m1.toString());
+        assertEquals(,m1.toString());
+        assertEquals(,m1.toString());
+        assertEquals(,m1.toString());
     }
 }
