@@ -26,7 +26,6 @@ class RationalTest {
         r2=new Rational(3,9);
         r3=new Rational(2,2);
         r4=new Rational(100,1);
-        r5=new Rational(1,0);
         r6=new Rational(0,2);
         r7=new Rational(4,5);
         r8=new Rational(-7,8);
@@ -41,7 +40,6 @@ class RationalTest {
     void add() {
         assertEquals("1",r1.add(r2).toString());
         assertEquals("12/9",r3.add(r2).toString());
-        assertEquals("null",r4.add(r5).toString());
         assertEquals("101",r4.add(r3).toString());
         assertEquals("22/15",r1.add(r7).toString());
 
@@ -52,7 +50,6 @@ class RationalTest {
     void mul() {
         assertEquals("2/9",r1.mul(r2).toString());
         assertEquals("100",r3.mul(r4).toString());
-        assertEquals("null",r5.mul(r1).toString());
         assertEquals("8/15",r1.mul(r7).toString());
         assertEquals("0",r4.mul(r6).toString());
 
@@ -62,7 +59,6 @@ class RationalTest {
     void addRational() {
         assertEquals("1",r1.addRational(r2).toString());
         assertEquals("12/9",r3.addRational(r2).toString());
-        assertEquals("null",r4.addRational(r5).toString());
         assertEquals("101",r4.addRational(r3).toString());
         assertEquals("22/15",r1.addRational(r7).toString());
     }
@@ -71,7 +67,6 @@ class RationalTest {
     void addInteger() {
         assertEquals("26/3",r1.addInteger(i2).toString());
         assertEquals("4/5",r7.addInteger(i1).toString());
-        assertEquals("null",r5.addInteger(i2).toString());
         assertEquals("25/3",r2.addInteger(i2).toString());
         assertEquals("301/3",r2.addInteger(i3).toString());
     }
@@ -80,7 +75,6 @@ class RationalTest {
     void mulRational() {
         assertEquals("2/9",r1.mulRational(r2).toString());
         assertEquals("100",r3.mulRational(r4).toString());
-        assertEquals("null",r5.mulRational(r1).toString());
         assertEquals("8/15",r1.mulRational(r7).toString());
         assertEquals("0",r4.mulRational(r6).toString());
     }
@@ -89,7 +83,6 @@ class RationalTest {
     void mulInteger() {
         assertEquals("16/3",r1.addInteger(i2).toString());
         assertEquals("0",r7.addInteger(i1).toString());
-        assertEquals("null",r5.addInteger(i2).toString());
         assertEquals("24/9",r2.addInteger(i2).toString());
         assertEquals("100/3",r2.addInteger(i3).toString());
     }
@@ -98,7 +91,6 @@ class RationalTest {
     void power() {
         assertEquals("32/243",r1.power(5));
         assertEquals("1/27",r2.power(3));
-        assertEquals("null",r5.power(2));
         assertEquals("0",r6.power(4));
         assertEquals("4/5",r7.power(1));
 
@@ -107,7 +99,6 @@ class RationalTest {
     @Test
     void sign() {
         assertEquals("1",r1.sign());
-        assertEquals("null",r5.sign());
         assertEquals("0",r6.sign());
         assertEquals("-1",r8.sign());
 
@@ -116,7 +107,6 @@ class RationalTest {
     @Test
     void neg() {
         assertEquals("-2/3",r1.neg());
-        assertEquals("null",r5.neg());
         assertEquals("0",r6.neg());
         assertEquals("7/8",r8.neg());
 
@@ -126,7 +116,6 @@ class RationalTest {
     @Test
     void reduce() {
         assertEquals("1/3",r2.reduce());
-        assertEquals("null",r5.reduce());
         assertEquals("0",r6.reduce());
         assertEquals("7/8",r8.reduce());
     }
