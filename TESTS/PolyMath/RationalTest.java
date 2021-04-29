@@ -93,7 +93,7 @@ class RationalTest {
         assertEquals("1/27",r2.power(3).toString());
         assertEquals("0",r6.power(4).toString());
         assertEquals("4/5",r7.power(1).toString());
-
+        assertEquals("9/4", r1.power(-2).toString());
     }
 
     @Test

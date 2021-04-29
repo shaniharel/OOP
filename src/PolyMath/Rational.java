@@ -54,11 +54,20 @@ public class Rational implements PolyMath.Scalar {
     public Scalar power(int exponent) {
         int num = 1;
         int den = 1;
-        for (int i = 0; i < exponent; i++) {
-            num *= numerator;
-            den *= denominator;
+        if (exponent >= 0) {
+            for (int i = 0; i < exponent; i++) {
+                num *= numerator;
+                den *= denominator;
+            }
+            return new Rational(num, den);
+        } else {
+            for (int i = 0; i < (exponent * (-1)); i++) {
+                num *= numerator;
+                den *= denominator;
+            }
+            return new Rational(den, num);
         }
-        return new Rational(num, den);
+
     }
 
     public int sign() {

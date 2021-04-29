@@ -100,6 +100,7 @@ class IntegerTest {
         assertEquals("0", n1.power(3).toString());
         assertEquals("25", n5.power(2).toString());
         assertEquals("-125", n5.power(3).toString());
+        assertEquals("1/16", n4.power(-2).toString());
     }
 
     @Test

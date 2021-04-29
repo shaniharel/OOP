@@ -39,15 +39,31 @@ public class Integer implements Scalar {
     public Scalar mulInteger(Integer s) {
         return new Integer(s.getNumber()*this.number);
     }
+/*
+    @Override
+    public Scalar power(int exponent) {
+        Integer powered=new Integer(1);
+        for (int i=1; i<=exponent;i++)
+        {
+            powered = powered.mulInteger(this);
+        }
+
+        if (exponent < 0) powered = new Rational(1, powered);
+        return  powered;
+    }
+
+ */
 
     @Override
     public Scalar power(int exponent) {
-        Scalar powered=new Integer(1);
-        for (int i=1; i<=exponent;i++)
-        {
-            powered=powered.mulInteger(this);
+        int num = 1;
+        if (exponent >= 0) {
+            for (int i = 0; i < exponent; i++) num *= number;
+            return new Integer(num);
+        } else {
+            for (int i = 0; i < (exponent * (-1)); i++) num *= number;
+            return new Rational(1, num);
         }
-        return  powered;
     }
 
     @Override
