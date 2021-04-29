@@ -34,8 +34,6 @@ class MonomialTest {
     @Test
     void add() {
         assertEquals("3x^2",m1.add(m6).toString());
-        assertEquals("null",m2.add(m5).toString());
-        assertEquals("null",m3.add(m4).toString());
         assertEquals("-2",m2.add(m7).toString());
         assertEquals("(7/8)x^4",m5.add(m8).toString());
     }
@@ -54,7 +52,7 @@ class MonomialTest {
     @Test
     void evaluate() {
         assertEquals("-9/2",m1.evaluate(new Rational(3,4)).toString());
-        assertEquals("null",m2.evaluate(new Integer(6)).toString());
+        assertEquals("6",m2.evaluate(new Integer(6)).toString());
         assertEquals("1",m3.evaluate(new Rational(1,9)).toString());
         assertEquals("24",m4.evaluate(new Integer(6)).toString());
     }
