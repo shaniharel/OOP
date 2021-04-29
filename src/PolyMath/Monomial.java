@@ -11,6 +11,7 @@ public class Monomial {
     }
 
     public Monomial add(Monomial m) {
+        if (m.exponent != exponent) throw new IllegalArgumentException("can't add monomial with different exponent");
         Scalar sum = this.coefficient.add(m.coefficient);
         return new Monomial(exponent, sum);
     }
