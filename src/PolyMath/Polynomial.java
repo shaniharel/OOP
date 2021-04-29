@@ -10,7 +10,7 @@ public class Polynomial {
         poly = monos;
     }
 
-    private Polynomial(String input) {
+    public Polynomial(String input) {
         String[] s=input.split(" ");
         poly = new LinkedList<Monomial>();
         for (int i = 0; i < s.length; i++)
