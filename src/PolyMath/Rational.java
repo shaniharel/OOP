@@ -58,9 +58,9 @@ public class Rational implements PolyMath.Scalar {
     }
 
     public int sign() {
-        if (numerator / denominator < 0) return -1;
-        else if (numerator/ denominator > 0) return 1;
-        else return 0;
+        if (numerator == 0) return 0;
+        else if (numerator > 0 && denominator > 1) return 1;
+        else return -1;
     }
 
     public Scalar neg() {
